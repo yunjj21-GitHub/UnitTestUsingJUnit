@@ -49,6 +49,7 @@ dependencies {
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.android.test.core)
+    testImplementation(libs.mockito.core)
 
     // Instrumentation Test
     androidTestImplementation(libs.androidx.junit)

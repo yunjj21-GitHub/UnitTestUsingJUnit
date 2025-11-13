@@ -13,6 +13,7 @@ material = "1.13.0"
 junit = "4.13.2"
 junitJupiterApi = "6.0.1"
 androidTestCore = "1.9.0"
+mockitoCore = "5.20.0"
 
 # Instrumentation Test
 junitVersion = "1.3.0"
@@ -29,6 +30,7 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junitJupiterApi" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junitJupiterApi" }
 android-test-core = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "androidTestCore" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 
 # Instrumentation Test
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

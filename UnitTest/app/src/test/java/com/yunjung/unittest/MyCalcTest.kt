@@ -1,16 +1,27 @@
 package com.yunjung.unittest
 
 import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Timeout
+import org.mockito.Mock
+import org.mockito.Mockito.atLeast
+import org.mockito.Mockito.atMost
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
+import org.mockito.Mockito.only
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
 class MyCalcTest {
     private lateinit var myCalc: MyCalc
+
+    @Mock
+    private lateinit var mockListUnsingAnno: MutableList<String>
 
     companion object {
         @JvmStatic
@@ -59,5 +70,33 @@ class MyCalcTest {
     fun calculateArea_zeroRadius_returnsCorrectResult() {
         val result = myCalc.calculateArea(0.0)
         assertEquals(result, 0.0)
+    }
+
+    @Test
+    fun verifyMockList(){
+        mockListUnsingAnno.add("one")
+        mockListUnsingAnno.add("two")
+
+        val mockListUsingMethod = mock<MutableList<String>>(mutableListOf())
+        mockListUsingMethod.add("one")
+        mockListUsingMethod.add("two")
+
+        val mockListUsingInline: MutableList<String> = mock()
+        mockListUsingInline.add("one")
+        mockListUsingInline.add("two")
+
+        verify(mockListUnsingAnno).add("one")
+        verify(mockListUsingMethod).add("one")
+        verify(mockListUsingInline).add("one")
+
+        verify(mockListUnsingAnno, times(2)).add("two")
+        verify(mockListUnsingAnno, never()).add("three")
+        verify(mockListUnsingAnno, atLeast(2)).add("two")
+        verify(mockListUnsingAnno, atMost(2)).add("two")
+        verify(mockListUnsingAnno, only()).add("two")
+    }
+
+    private inline fun <reified T> mock(): T {
+        return mock(T::class.java)
     }
 }
